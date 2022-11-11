@@ -1,0 +1,185 @@
+make a static generation of the available surveys on the survey page (optional)
+
+do research about 
+surveySchema.statics = {
+  populateFromLatest: function(name) {
+    this.findOne({ name: name })
+    .where({ published: true })
+    .populate('questions')
+    .exec(function(err, survey) {
+      return survey
+    });
+  }
+}
+///////////////////////////////////////////////////////////////
+get static props:
+
+    await connectDB()
+    const answersM = await Answers.find({ surveyId: "6362b3eb7dc55e88ed60725f" }).lean()
+   
+    if (answersM !== null) {
+        JSON.parse(JSON.stringify(answersM))
+    }
+    
+    return {
+        props: { answers: answersM.answers },
+    }
+}
+////////////////////////////////////////////////////////////////
+ post request
+    // async function submitSurvey() {
+    //     console.log("submitting...")
+
+    //     const { data } = await axios.post(
+    //         "/api/postSurvey",
+
+    //         { title: title, questions: questions },
+    //         {
+    //             headers: {
+    //                 "Content-type": "application/json",
+    //             },
+    //         }
+    //     )
+    //     console.log(data)
+
+    //     // console.log("survey uploaded to " + data)
+    // }
+    // .then((res) => console.log("posting data", res))
+    // .catch((err) => console.log(err))
+///////////////////////////////////////////////////////////////
+
+import mongoose from "mongoose";
+
+const questionSelectAnswerSchema = new mongoose.Schema(
+  {
+    questionAnswers: {
+      type: Array,
+    },
+    QuestionId: {
+      type: Schema.Types.ObjectId,
+      ref: "question",
+    },
+    profileId: {
+      type: Schema.Types.ObjectId,
+      ref: "Users",
+    },
+  },
+  { timestamps: true }
+);
+
+let QuestionSelectAnswer =
+  mongoose.models.QuestionSelectAnswer ||
+  mongoose.model("questionSelectAnswer", questionSelectAnswerSchema);
+
+export default QuestionSelectAnswer;
+/////////////////////////////////////////////////////
+  {
+    QuestionInupt: {
+      type: String,
+    },
+    profileId: {
+      type: String,
+      unique: true,
+    },
+  },
+  { timestamps: true }
+);
+////////////////////////////////////
+answer surv:
+ const handleChange = (e, i) => {
+        const { value, answer } = e.target
+
+        const newAnswer = [...answers]
+        newAnswer[i] = {
+            ...newAnswer[i],
+            [answer]: value,
+        }
+
+        console.log(newAnswer)
+        setAnswers(newAnswer)
+    }
+
+/////////////////////////////////
+
+                {/* <div>
+                    <ul>
+                        {questions.map((question) => (
+                            <li key={question.id}>{question.text}</li>
+                        ))}
+                    </ul>
+                </div>
+            </form> */}
+//////////////////
+
+///////////////
+survey api:
+export default function handler(req, res) {
+    if (req.method === "GET") {
+        res.status(200).json(comments)
+    } else if (req.method === "POST") {
+        const survey = req.body.survey
+        //comment refers to the property set in the front end
+        const newSurvey = {
+            id: Date.now(),
+            text: survey,
+        }
+        surveys.push(newSurvey)
+        //surveys refers to the surveys array
+        res.status(201).json(newSurvey)
+    }
+    res.status(200).json(survey)
+}
+
+//////////////
+get static props thing
+    // .project({})
+    // .toArray()
+    const surveys= JSON.parse(JSON.stringify(data))
+    //he map() could be done here
+    // const filtered = properties.map(property => {
+    //     const something = JSON.parse(JSON.stringify(property.price))
+    //     return {
+    //         thing: frontendname
+    //     }
+    // })
+
+    //insert input under the property.questions in the front
+
+    //add answer button should have a function that posts to the databse. a
+
+    //method
+    //statics in sc
+
+////////////////////////////////////
+                        
+                            const [answers, setAnswers] = useState(questions)
+
+    const handleAnswer = (e, id) => {
+        var result = [...answers]
+        result = result.map((x) => {
+            if (x.id === id) {
+                x.question = e.target.value
+                return x
+            } else return x
+        })
+        setAnswers(result)
+    }
+                        
+                        <input
+                                  name="answer"
+                                  type="text"
+                                  value={answer.question}
+                                //   className={classes.input}
+                                  onChange={(e) => handleAnswer(e, answer.id)}
+                                />
+    ///////////////////////////////////
+/////////////
+curried function
+//////////////
+work on the create survey page
+/////////////
+find mongo methods 
+    // .project({})
+    // .toArray()
+
+///

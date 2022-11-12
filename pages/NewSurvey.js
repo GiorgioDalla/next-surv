@@ -1,6 +1,10 @@
 import React, { useState } from "react"
 // import Users from "../lib/models/userSchema"
-import connectDB from "../lib/connectDB"
+// import connectDB from "../lib/connectDB"
+import { ObjectID } from "bson"
+import { CopyToClipboard } from "react-copy-to-clipboard"
+// import { connectToDatabase } from "../lib/mongodb"
+
 import { getSession, signOut } from "next-auth/react"
 import axios from "axios"
 
@@ -8,6 +12,9 @@ function NewSurvey({ user }) {
     const [questions, setQuestions] = useState([])
     const [text, setText] = useState("")
     const [title, setTitle] = useState("")
+    const id = new ObjectID()
+    const inputValue = "http://localhost:3000/answerSurver/" + id
+
 
     const addQuestion = () => {
         setQuestions([
@@ -20,19 +27,15 @@ function NewSurvey({ user }) {
         setText("")
         console.log(questions, title)
     }
-    const shareSurvey = async () => {
-        const { database } = await connectToDatabase()
-        const data = await database.collection("surveys").findOne({ title: title }, { _id: 1 })
-        let reqSurvey = JSON.parse(JSON.stringify(data))
-        console.log(reqSurvey)
-    }
+
+    const shareSurvey = async () => {}
 
     const submitSurvey = async () => {
         try {
             const { data } = await axios.post(
                 "/api/postSurvey",
 
-                { title: title, questions: questions, profileId: user.profileId },
+                { _id: id, title: title, questions: questions, profileId: user.profileId },
                 {
                     headers: {
                         "content-type": "application/json",
@@ -62,7 +65,9 @@ function NewSurvey({ user }) {
             <button onClick={() => submitSurvey()}>Done</button>
             <br />
             <br />
-            <button onClick={shareSurvey}>Share survey</button>
+            <CopyToClipboard text={inputValue}>
+                <button onClick={shareSurvey}>Share survey</button>
+            </CopyToClipboard>
             <br />
             <br />
             <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
@@ -81,11 +86,10 @@ export async function getServerSideProps(context) {
             },
         }
     }
-
-    await connectDB()
-
     return {
-        props: { user: session.user },
+        props: {
+            user: session.user,
+        },
     }
 }
 

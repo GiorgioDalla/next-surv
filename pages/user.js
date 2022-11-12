@@ -31,6 +31,7 @@ function User({ user, bio }) {
             <br />
             <input onChange={(e) => changeValue(e.target.value)} value={value}></input>
             <button onClick={() => updateBio()}>Update Bio</button>
+            <></>
             <br />
             <br />
             <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>

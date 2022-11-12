@@ -1,15 +1,14 @@
 import React, { useState } from "react"
 import axios from "axios"
-import { connectToDatabase } from "../lib/mongodb"
-import { getSession, signOut } from "next-auth/react"
+import connectDB from "../../lib/connectDB"
+import Surveys from "../../lib/models/surveySchema"
 
-import connectDB from "../lib/connectDB"
+import { getSession, signOut } from "next-auth/react"
 
 //destructuring prop from get serverside props
 
 function answerSurver({ survey, user }) {
-    const { questions, _id } = survey
-    // console.log(survey)
+    const { questions, title } = survey
     const answer = Array(questions.length).fill("")
 
     const [newAnswers, setNewAnswers] = useState(answer)
@@ -45,15 +44,6 @@ function answerSurver({ survey, user }) {
         }
     }
 
-    //get request get questions
-    //display input under each question
-    //post those answers as answer sheet
-    //api call must be specific to the survey
-
-    // axios.get(`/api/getSurvey`)
-
-    //
-
     return (
         <>
             <h1>Answer Survey "{survey.title}" </h1>
@@ -79,13 +69,7 @@ function answerSurver({ survey, user }) {
     )
 }
 export async function getServerSideProps(context) {
-    const { database } = await connectToDatabase()
-    const data = await database.collection("surveys").findOne({ title: `giorgio` })
-    let survey = JSON.parse(JSON.stringify(data))
-    
-
     const session = await getSession(context)
-
     if (!session) {
         return {
             redirect: {
@@ -94,6 +78,12 @@ export async function getServerSideProps(context) {
             },
         }
     }
+
+    const { index } = context.params
+
+    await connectDB()
+    const surv = await Surveys.findOne({ _id: index }, { questions: 1, _id: 1, title: 1 })
+    const survey = JSON.parse(JSON.stringify(surv))
 
     return {
         props: { survey: survey, user: session.user },

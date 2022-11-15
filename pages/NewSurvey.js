@@ -1,10 +1,6 @@
 import React, { useState } from "react"
-// import Users from "../lib/models/userSchema"
-// import connectDB from "../lib/connectDB"
 import { ObjectID } from "bson"
 import { CopyToClipboard } from "react-copy-to-clipboard"
-// import { connectToDatabase } from "../lib/mongodb"
-
 import { getSession, signOut } from "next-auth/react"
 import axios from "axios"
 
@@ -14,7 +10,6 @@ function NewSurvey({ user }) {
     const [title, setTitle] = useState("")
     const id = new ObjectID()
     const inputValue = "http://localhost:3000/answerSurver/" + id
-
 
     const addQuestion = () => {
         setQuestions([

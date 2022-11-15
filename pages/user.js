@@ -1,12 +1,14 @@
 import { getSession, signOut } from "next-auth/react"
+import { useRouter } from "next/router"
 import Users from "../lib/models/userSchema"
 import connectDB from "../lib/connectDB"
 import { useState } from "react"
 import axios from "axios"
+import Link from "next/link"
 
 function User({ user, bio }) {
+    const router = useRouter()
     const [value, changeValue] = useState("New Bio")
-
     async function updateBio() {
         const { data } = await axios.post(
             "/api/updateBio",
@@ -22,6 +24,10 @@ function User({ user, bio }) {
 
         location.reload()
     }
+    const handleClick = () => {
+        console.log("Let's build survey")
+        router.replace("/NewSurvey")
+    }
 
     return (
         <div>
@@ -31,7 +37,10 @@ function User({ user, bio }) {
             <br />
             <input onChange={(e) => changeValue(e.target.value)} value={value}></input>
             <button onClick={() => updateBio()}>Update Bio</button>
-            <></>
+            <Link href="/mySurveys/">
+                <a>My surveys</a>
+            </Link>
+            <button onClick={handleClick}>Make Survey Now</button>
             <br />
             <br />
             <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>

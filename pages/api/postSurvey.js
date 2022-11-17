@@ -11,7 +11,7 @@ export default async function postSurvey(req, res) {
     try {
         await Surveys.create(
             { _id: _id, title: title, questions: questions, profileId: profileId },
-            function (err, small) {
+            function (err) {
                 if (err) return console.log(err)
             }
         )

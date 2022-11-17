@@ -3,13 +3,14 @@ import { ObjectID } from "bson"
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import { getSession, signOut } from "next-auth/react"
 import axios from "axios"
+import AddRewards from "../components/pumpIt"
 
 function NewSurvey({ user }) {
     const [questions, setQuestions] = useState([])
     const [text, setText] = useState("")
     const [title, setTitle] = useState("")
     const id = new ObjectID()
-    const inputValue = "http://localhost:3000/answerSurver/" + id
+    const inputValue = "https://wenti.vercel.app/answerSurver/" + id
 
     const addQuestion = () => {
         setQuestions([
@@ -63,6 +64,7 @@ function NewSurvey({ user }) {
             <CopyToClipboard text={inputValue}>
                 <button onClick={shareSurvey}>Share survey</button>
             </CopyToClipboard>
+            <AddRewards />
             <br />
             <br />
             <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>

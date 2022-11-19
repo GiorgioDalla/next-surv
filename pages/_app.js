@@ -17,7 +17,7 @@ import { SessionProvider } from "next-auth/react"
 import { jsonRpcProvider } from "wagmi/providers/jsonRpc"
 
 const { provider, webSocketProvider, chains } = configureChains(
-    [auroraChain],
+    [chain.goerli, auroraChain],
     [jsonRpcProvider({ rpc: (chain) => ({ http: chain.rpcUrls.default }) })]
 )
 

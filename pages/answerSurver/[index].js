@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import axios from "axios"
 import connectDB from "../../lib/connectDB"
 import Surveys from "../../lib/models/surveySchema"
-
+import EarnRewards from "../../components/earnRewads"
 import { getSession, signOut } from "next-auth/react"
 
 //destructuring prop from get serverside props
@@ -64,6 +64,7 @@ function answerSurver({ survey, user }) {
             })}
 
             <button onClick={submitAnswers}>submit answers</button>
+            <EarnRewards />
             <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
         </>
     )
@@ -80,7 +81,7 @@ export async function getServerSideProps(context) {
     }
 
     const { index } = context.params
-
+    console.log(context.params)
     await connectDB()
     const surv = await Surveys.findOne({ _id: index }, { questions: 1, _id: 1, title: 1 })
     const survey = JSON.parse(JSON.stringify(surv))

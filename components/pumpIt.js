@@ -1,51 +1,34 @@
-import { abi, contractAddresses } from "../constants"
-import { useMoralis, useWeb3Contract } from "react-moralis"
-import { useNotification } from "web3uikit"
+import * as React from "react"
+import { useDebounce } from "use-debounce"
+import { utils } from "ethers"
+import { usePrepareSendTransaction, useSendTransaction } from "wagmi"
 
-export default function pumpIt() {
-    // const { chainId: chainIdHex, isWeb3Enabled, account, Moralis } = useMoralis()
-    // const chainId = parseInt(chainIdHex)
-    // const wentiAddress = chainId in contractAddresses ? contractAddresses[chainId][0] : null
-    // const dispatch = useNotification()
+export default function addRew() {
+    const [amount, setAmount] = React.useState("")
+    const [debouncedValue] = useDebounce(amount, 500)
 
-    // const handleSuccess = async function (tx) {
-    //     await tx.wait(1)
-    //     handleNewNotification(tx)
-    //     updateUI()
-    // }
+    const { config } = usePrepareSendTransaction({
+        request: {
+            to: "0xa3db6208eEfBCeE9695d6A586407dC5cD1E33896",
+            value: debouncedValue ? utils.parseEther(debouncedValue) : undefined,
+        },
+    })
+    const { sendTransaction } = useSendTransaction(config)
 
-    // const handleNewNotification = function () {
-    //     dispatch({
-    //         type: "info",
-    //         message: "Rewards added !",
-    //         title: "Transaction Notification",
-    //         position: "topR",
-    //         icon: "bell",
-    //     })
-    // }
-    // const {
-    //     runContractFunction: pumpIt,
-    //     data: enterTxResponse,
-    //     isLoading,
-    //     isFetching,
-    // } = useWeb3Contract({
-    //     abi: abi,
-    //     contractAddress: wentiAddress,
-    //     functionName: "pumpIt",
-    //     params: {},
-    // })
     return (
-        <div>
-            <button
-                // onClick={async () =>
-                //     await pumpIt({
-                //         // onSuccess: handleSuccess,
-                //         onError: (error) => console.log(error), //add it to all my runcontract functions
-                //     })
-                // }
-            >
-                add rewards
-            </button>
-        </div>
+        <form
+            onSubmit={(e) => {
+                e.preventDefault()
+                sendTransaction?.()
+            }}
+        >
+            <input
+                aria-label="Amount (ether)"
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="0.05"
+                value={amount}
+            />
+            <button onClick={sendTransaction}> Add rewards</button>
+        </form>
     )
 }

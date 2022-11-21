@@ -12,7 +12,7 @@ function answerSurver({ survey, user, _id }) {
     const answer = Array(questions.length).fill("")
 
     const [newAnswers, setNewAnswers] = useState(answer)
-    const _id = _id
+    const survId = _id
     console.log(_id)
 
     const handleChange = (index, newValue) => {
@@ -31,7 +31,7 @@ function answerSurver({ survey, user, _id }) {
             const { data } = await axios.post(
                 "/api/postAnswer",
 
-                { answers: newAnswers, surveyId: _id, profileId: user.profileId },
+                { answers: newAnswers, surveyId: survId, profileId: user.profileId },
                 {
                     headers: {
                         "content-type": "application/json",

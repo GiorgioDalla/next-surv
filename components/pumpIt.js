@@ -17,7 +17,7 @@ export default function addRew() {
     const { isLoading, isSuccess } = useWaitForTransaction({
         hash: data?.hash,
     })
-  console.log(data)
+    console.log(data)
 
     return (
         <form

@@ -11,6 +11,8 @@ function SignIn() {
     const { isConnected } = useAccount()
     const { signMessageAsync } = useSignMessage()
     const { push } = useRouter()
+    
+    console.log("please login using ethereum")
 
     const handleAuth = async () => {
         if (isConnected) {

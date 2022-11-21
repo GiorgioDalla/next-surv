@@ -13,7 +13,7 @@ function SignIn() {
     
     console.log("please login using  ethereum chain")
 
-    console.log("please connect using ethereum")
+    console.log("please login using ethereum")
 
     const handleAuth = async () => {
         if (isConnected) {

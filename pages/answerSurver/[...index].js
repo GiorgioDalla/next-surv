@@ -13,6 +13,7 @@ function answerSurver({ survey, user, _id }) {
 
     const [newAnswers, setNewAnswers] = useState(answer)
     const _id = _id
+    console.log(_id)
     console.log(newAnswers)
 
     const handleChange = (index, newValue) => {

@@ -6,7 +6,7 @@ import { abi } from "../constants"
 
 export default function earnRewards() {
     const { config } = usePrepareContractWrite({
-        address: "0xa3db6208eEfBCeE9695d6A586407dC5cD1E33896",
+        address: "0x1b32bc51bf1B3fA61855d540a0fC22E94AC4C068",
         abi: abi,
         functionName: "earnPrize",
     })

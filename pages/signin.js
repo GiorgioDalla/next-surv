@@ -4,7 +4,6 @@ import { useAccount, useConnect, useSignMessage, useDisconnect } from "wagmi"
 import { useRouter } from "next/router"
 import axios from "axios"
 
-
 function SignIn() {
     const { connectAsync } = useConnect()
     const { disconnectAsync } = useDisconnect()
@@ -13,6 +12,8 @@ function SignIn() {
     const { push } = useRouter()
     
     console.log("please login using  ethereum chain")
+
+    console.log("please connect using ethereum")
 
     const handleAuth = async () => {
         if (isConnected) {

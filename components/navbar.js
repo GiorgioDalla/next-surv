@@ -11,7 +11,7 @@ export default function Navbar() {
                 <Link href="/mySurveys">My Surveys</Link>
             </div>
             <div className="mx--4 flex-auto text-center px-4 py-4 m-2 w-14 hover:font-bold">
-                <Link href="/NewSurvey">Make Survey</Link>
+                <Link href="/NewSurvey">Make a Survey</Link>
             </div>
             <button
                 onClick={() => signOut({ redirect: "/signin" })}

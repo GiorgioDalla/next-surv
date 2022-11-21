@@ -7,7 +7,7 @@ import { getSession, signOut } from "next-auth/react"
 
 //destructuring prop from get serverside props
 
-function answerSurver({ survey, user }) {
+function answerSurver({ survey, user, _id }) {
     const { questions, title } = survey
     const answer = Array(questions.length).fill("")
 
@@ -64,7 +64,10 @@ function answerSurver({ survey, user }) {
                 )
             })}
 
-            <button onClick={submitAnswers} className="mb-6 py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-purple-700 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+            <button
+                onClick={submitAnswers}
+                className="mb-6 py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-purple-700 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            >
                 submit answers
             </button>
             <EarnRewards />
@@ -89,7 +92,7 @@ export async function getServerSideProps(context) {
     const survey = JSON.parse(JSON.stringify(surv))
 
     return {
-        props: { survey: survey, user: session.user },
+        props: { survey: survey, user: session.user, _id: index },
     }
 }
 

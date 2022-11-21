@@ -9,7 +9,7 @@ export default function addRew() {
 
     const { config } = usePrepareSendTransaction({
         request: {
-            to: "0xa3db6208eEfBCeE9695d6A586407dC5cD1E33896",
+            to: "0x1b32bc51bf1B3fA61855d540a0fC22E94AC4C068",
             value: debouncedValue ? utils.parseEther(debouncedValue) : undefined,
         },
     })

@@ -10,7 +10,8 @@ const auroraChain: Chain  = {
         symbol: "ETH",
     },
     rpcUrls: {
-        default: "https://aurora-testnet.infura.io/v3/52bbfeb3802f490cb97b340eac1ccc69",
+        default: "https://testnet.aurora.dev",
+        infura:"https://aur52bbfeb3802f490cb97b340eac1ccc69ora-testnet.infura.io/v3/"
     },
     blockExplorers: {
         default: { name: "aurorascan", url: "https://testnet.aurorascan.dev/" },

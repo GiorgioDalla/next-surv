@@ -8,14 +8,14 @@ function mySurveys(surveys) {
 
     return (
         <>
-            <div>my Surveys</div>
+            <div className="ml-10 mt-10 text-xl mb-10">My Surveys :</div>
             {test1.map((survey) => {
                 return (
-                    <li key={survey._id}>
+                    <li key={survey._id} className='ml-10'>
                         <Link href={`viewResults/${survey._id}`}>
-                            <a>{survey.title}</a>
+                            <a className=" hover:font-bold">{survey.title}</a>
                         </Link>
-                        <p></p>
+                        
                     </li>
                 )
             })}

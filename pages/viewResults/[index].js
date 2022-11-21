@@ -9,7 +9,7 @@ function viewResults(answers) {
 
     return (
         <>
-            <h1>view Results</h1>
+            <h1 className='mt-10 text-xl'>view Results</h1>
             {totalAnswers.map(({ answers, index }) => (
                 <p key={index}> {answers} </p>
             ))}

@@ -24,8 +24,6 @@ function NewSurvey({ user }) {
         console.log(questions, title)
     }
 
-    const shareSurvey = async () => {}
-
     const submitSurvey = async () => {
         try {
             const { data } = await axios.post(
@@ -45,29 +43,53 @@ function NewSurvey({ user }) {
     }
 
     return (
-        <div>
-            <input value={title} onChange={(e) => setTitle(e.target.value)}></input>
-            <>title</>
-            <input value={text} onChange={(e) => setText(e.target.value)}></input>
-            <button onClick={addQuestion}>Add question</button>
+        <div className="mt-12 ml-20">
+            <div className="mb-12">
+                <label className="pr-12">
+                    Survey title :
+                    <input
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        className="ml-3 border-2 border-gray rounded-lg shadow-sm     focus: outline-none focus: border-gray-200 font-medium  text-gray-900"
+                    ></input>
+                </label>
+            </div>
+            <button
+                onClick={addQuestion}
+                className="mb-6 py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-purple-700 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            >
+                Add question
+            </button>
+            <input
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+                className="ml-3 border-2 border-gray rounded-lg shadow-sm     focus: outline-none focus: border-gray-200"
+            ></input>
 
-            <ul>
+            <ul className="">
                 {questions.map((question) => (
                     <li key={question.id}>
                         {question.id + 1}.{question.name}
                     </li>
                 ))}
             </ul>
-            <button onClick={() => submitSurvey()}>Done</button>
+            <button
+                onClick={() => submitSurvey()}
+                className="py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-purple-700 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+            >
+                Done
+            </button>
             <br />
             <br />
-            <CopyToClipboard text={inputValue}>
-                <button onClick={shareSurvey}>Share survey</button>
-            </CopyToClipboard>
             <AddRewards />
+            <CopyToClipboard text={inputValue}>
+                <button className="py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-purple-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                    Share survey
+                </button>
+            </CopyToClipboard>
+
             <br />
             <br />
-            <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
         </div>
     )
 }

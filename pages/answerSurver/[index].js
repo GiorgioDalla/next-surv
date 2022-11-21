@@ -46,11 +46,11 @@ function answerSurver({ survey, user }) {
 
     return (
         <>
-            <h1>Answer Survey "{survey.title}" </h1>
+            <h1 className="flex ml-20 mt-10 text-xl mb-10">Answer Survey "{survey.title}" </h1>
             {newAnswers.map((questionData, index) => {
                 return (
                     <div key={index}>
-                        <h2>
+                        <h2 className='ml-10'>
                             {index + 1}. {questions[index].name}
                         </h2>
                         <input
@@ -58,14 +58,14 @@ function answerSurver({ survey, user }) {
                             type="text"
                             value={questionData}
                             onChange={(e) => handleChange(index, e.target.value)}
+                            className="ml-10 border-2 border-gray rounded-lg shadow-sm focus: outline-none focus: border-gray-200"
                         />
                     </div>
                 )
             })}
 
-            <button onClick={submitAnswers}>submit answers</button>
+            <button onClick={submitAnswers} className=''>submit answers</button>
             <EarnRewards />
-            <button onClick={() => signOut({ redirect: "/signin" })}>Sign out</button>
         </>
     )
 }

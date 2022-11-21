@@ -50,7 +50,7 @@ function answerSurver({ survey, user }) {
             {newAnswers.map((questionData, index) => {
                 return (
                     <div key={index}>
-                        <h2 className='ml-10'>
+                        <h2 className="ml-10">
                             {index + 1}. {questions[index].name}
                         </h2>
                         <input
@@ -64,7 +64,9 @@ function answerSurver({ survey, user }) {
                 )
             })}
 
-            <button onClick={submitAnswers} className=''>submit answers</button>
+            <button onClick={submitAnswers} className="">
+                submit answers
+            </button>
             <EarnRewards />
         </>
     )
